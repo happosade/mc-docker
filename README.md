@@ -6,3 +6,5 @@ it comes to running MC server without hogging too much resources.
 
 ## Running
 
+Change the row on `server.properties` to have
+`enable-jmx-monitoring=true` in order to get exporter to work correctly.
