@@ -1,0 +1,17 @@
+--- a/net/minecraft/server/BiomeStorage.java
++++ b/net/minecraft/server/BiomeStorage.java
+@@ -87,4 +87,14 @@
+ 
+         return this.h[i1 << BiomeStorage.e + BiomeStorage.e | j1 << BiomeStorage.e | l];
+     }
++
++    // CraftBukkit start
++    public void setBiome(int i, int j, int k, BiomeBase biome) {
++        int l = i & BiomeStorage.b;
++        int i1 = MathHelper.clamp(j, 0, BiomeStorage.c);
++        int j1 = k & BiomeStorage.b;
++
++        this.h[i1 << BiomeStorage.e + BiomeStorage.e | j1 << BiomeStorage.e | l] = biome;
++    }
++    // CraftBukkit end
+ }
