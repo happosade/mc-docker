@@ -1,10 +1,15 @@
 version: "3.9"
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
 services:
   minecraft:
-    build: .
-    image: ilarioras/minecraft
+    image:  ilarioras/minecraft
+    container_name: spigot
     ports:
-      - "8080:8080"
+      - "8081:8081"
       - "25565:25565"
     volumes:
       - "./banned-ips.json:/minecraft/banned-ips.json:z"
@@ -26,9 +31,78 @@ services:
       - "./world:/minecraft/world:z"
       - "./world_nether:/minecraft/world_nether:z"
       - "./world_the_end:/minecraft/world_the_end:z"
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           memory: "6GB"
-      restart_policy:
-        condition: on-failure
+    labels:
+      org.label-schema.group: "minecraft"
+
+  prometheus:
+    image: prom/prometheus:v2.24.0
+    container_name: prometheus
+    volumes:
+      - "./prometheus:/etc/prometheus:z"
+      - "prometheus_data:/prometheus_data"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    labels:
+      org.label-schema.group: "monitoring"
+
+  grafana:
+    image: grafana/grafana:7.3.7
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    labels:
+      org.label-schema.group: "monitoring"
+
+  nodeexporter:
+    image: prom/node-exporter:v1.0.1
+    container_name: nodeexporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    restart: unless-stopped
+    ports:
+      - 9100:9100
+    labels:
+      org.label-schema.group: "monitoring"
+
+  cadvisor:
+    image: gcr.io/google-containers/cadvisor:v0.34.0
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    labels:
+      org.label-schema.group: "monitoring"

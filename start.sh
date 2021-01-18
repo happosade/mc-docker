@@ -1,6 +1,6 @@
 #!/bin/bash
 
-java -javaagent:./jmx_prometheus_javaagent-0.14.0.jar=8080:config.yaml \
+java -javaagent:./jmx_prometheus_javaagent-0.14.0.jar=8081:config.yaml \
      -XX:+UseShenandoahGC \
      -XX:MaxRAMPercentage=80 \
      -XX:InitialRAMPercentage=100 \
