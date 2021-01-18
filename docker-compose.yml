@@ -9,7 +9,7 @@ services:
     image:  ilarioras/minecraft
     container_name: spigot
     ports:
-      - "8080:8080"
+      - "8081:8081"
       - "25565:25565"
     volumes:
       - "./banned-ips.json:/minecraft/banned-ips.json:z"
@@ -31,12 +31,13 @@ services:
       - "./world:/minecraft/world:z"
       - "./world_nether:/minecraft/world_nether:z"
       - "./world_the_end:/minecraft/world_the_end:z"
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           memory: "6GB"
-      restart_policy:
-        condition: on-failure
+    labels:
+      org.label-schema.group: "minecraft"
 
   prometheus:
     image: prom/prometheus:v2.24.0
@@ -54,6 +55,8 @@ services:
     restart: unless-stopped
     ports:
       - 9090:9090
+    labels:
+      org.label-schema.group: "monitoring"
 
   grafana:
     image: grafana/grafana:7.3.7
@@ -68,6 +71,8 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
+    labels:
+      org.label-schema.group: "monitoring"
 
   nodeexporter:
     image: prom/node-exporter:v1.0.1
@@ -84,3 +89,20 @@ services:
     restart: unless-stopped
     ports:
       - 9100:9100
+    labels:
+      org.label-schema.group: "monitoring"
+
+  cadvisor:
+    image: gcr.io/google-containers/cadvisor:v0.34.0
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    labels:
+      org.label-schema.group: "monitoring"

@@ -1,0 +1,579 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Stuff from Minecraft",
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 5,
+    "links": [],
+    "panels": [
+      {
+        "datasource": null,
+        "description": "How much is used from allocated heap. Sum of these two must be less than what's set as a limit to Docker.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.3.7",
+        "targets": [
+          {
+            "expr": "jvm_memory_bytes_used",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "{{ area }}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Memory in use",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "hiddenSeries": false,
+        "id": 16,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.3.7",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "java_lang_OperatingSystem_CpuLoad",
+            "interval": "",
+            "legendFormat": "CPU Load",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "CPU load",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "percentunit",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "hiddenSeries": false,
+        "id": 14,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.3.7",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "jvm_threads_state",
+            "interval": "",
+            "legendFormat": "{{ state }}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Java Threads",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "cards": {
+          "cardPadding": null,
+          "cardRound": null
+        },
+        "color": {
+          "cardColor": "#b4ff00",
+          "colorScale": "sqrt",
+          "colorScheme": "interpolateOrRd",
+          "exponent": 0.5,
+          "mode": "spectrum"
+        },
+        "dataFormat": "timeseries",
+        "datasource": null,
+        "description": "How long each tick takes. Lower is better",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": null,
+              "filterable": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "heatmap": {},
+        "hideZeroBuckets": false,
+        "highlightCards": true,
+        "id": 8,
+        "legend": {
+          "show": true
+        },
+        "pluginVersion": "7.3.7",
+        "reverseYBuckets": false,
+        "targets": [
+          {
+            "expr": "net_minecraft_server_v1_16_R3_Server_averageTickTime",
+            "interval": "",
+            "legendFormat": "Server tick time",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Server tick time",
+        "tooltip": {
+          "show": true,
+          "showHistogram": false
+        },
+        "type": "heatmap",
+        "xAxis": {
+          "show": true
+        },
+        "xBucketNumber": null,
+        "xBucketSize": null,
+        "yAxis": {
+          "decimals": null,
+          "format": "dtdurationms",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true,
+          "splitFactor": null
+        },
+        "yBucketBound": "auto",
+        "yBucketNumber": null,
+        "yBucketSize": null
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "No idea what this means.",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "hiddenSeries": false,
+        "id": 18,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.3.7",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "rate(java_lang_Shenandoah_Cycles_LastGcInfo_memoryUsageBeforeGc_committed[5m])",
+            "interval": "",
+            "legendFormat": "{{ key }}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Something Shenandoah",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "transparent": true,
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "bytes",
+            "label": null,
+            "logBase": 10,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "cards": {
+          "cardPadding": null,
+          "cardRound": null
+        },
+        "color": {
+          "cardColor": "#b4ff00",
+          "colorScale": "sqrt",
+          "colorScheme": "interpolateOranges",
+          "exponent": 0.5,
+          "mode": "spectrum"
+        },
+        "dataFormat": "timeseries",
+        "datasource": null,
+        "description": "How long each GC cycle took. Lower is better.",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "heatmap": {},
+        "hideZeroBuckets": false,
+        "highlightCards": true,
+        "id": 10,
+        "legend": {
+          "show": false
+        },
+        "pluginVersion": "7.3.7",
+        "reverseYBuckets": false,
+        "targets": [
+          {
+            "expr": "java_lang_Shenandoah_Cycles_LastGcInfo_duration",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "GC cycle time",
+        "tooltip": {
+          "show": true,
+          "showHistogram": false
+        },
+        "type": "heatmap",
+        "xAxis": {
+          "show": true
+        },
+        "xBucketNumber": null,
+        "xBucketSize": null,
+        "yAxis": {
+          "decimals": null,
+          "format": "dtdurationms",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true,
+          "splitFactor": null
+        },
+        "yBucketBound": "auto",
+        "yBucketNumber": null,
+        "yBucketSize": null
+      }
+    ],
+    "refresh": "10s",
+    "schemaVersion": 26,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-15m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Minecraft",
+    "uid": "1RdRjKBMk",
+    "version": 6
+  }
