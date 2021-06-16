@@ -6,31 +6,32 @@ volumes:
 
 services:
   minecraft:
-    image:  ilarioras/minecraft
-    container_name: spigot
+    image: ilarioras/minecraft:16-1.17
+    user: "1000:1000"
+    container_name: minecraft
     ports:
       - "8081:8081"
       - "25565:25565"
     volumes:
-      - "./banned-ips.json:/minecraft/banned-ips.json:z"
-      - "./banned-players.json:/minecraft/banned-players.json:z"
-      - "./Bukkit:/minecraft/Bukkit:z"
-      - "./bukkit.yml:/minecraft/bukkit.yml:z"
-      - "./commands.yml:/minecraft/commands.yml:z"
-      - "./CraftBukkit:/minecraft/CraftBukkit:z"
-      - "./eula.txt:/minecraft/eula.txt:z"
-      - "./help.yml:/minecraft/help.yml:z"
-      - "./logs:/minecraft/logs:z"
-      - "./ops.json:/minecraft/ops.json:z"
-      - "./permissions.yml:/minecraft/permissions.yml:z"
-      - "./plugins:/minecraft/plugins:z"
-      - "./server.properties:/minecraft/server.properties:z"
-      - "./spigot.yml:/minecraft/spigot.yml:z"
-      - "./usercache.json:/minecraft/usercache.json:z"
-      - "./whitelist.json:/minecraft/whitelist.json:z"
-      - "./world:/minecraft/world:z"
-      - "./world_nether:/minecraft/world_nether:z"
-      - "./world_the_end:/minecraft/world_the_end:z"
+      - "./minecraft-data/banned-ips.json:/minecraft/banned-ips.json:z"
+      - "./minecraft-data/banned-players.json:/minecraft/banned-players.json:z"
+      - "./minecraft-data/Bukkit:/minecraft/Bukkit:z"
+      - "./minecraft-data/bukkit.yml:/minecraft/bukkit.yml:z"
+      - "./minecraft-data/commands.yml:/minecraft/commands.yml:z"
+      - "./minecraft-data/CraftBukkit:/minecraft/CraftBukkit:z"
+      - "./minecraft-data/eula.txt:/minecraft/eula.txt:z"
+      - "./minecraft-data/help.yml:/minecraft/help.yml:z"
+      - "./minecraft-data/logs:/minecraft/logs:z"
+      - "./minecraft-data/ops.json:/minecraft/ops.json:z"
+      - "./minecraft-data/permissions.yml:/minecraft/permissions.yml:z"
+      - "./minecraft-data/plugins:/minecraft/plugins:z"
+      - "./minecraft-data/server.properties:/minecraft/server.properties:z"
+      - "./minecraft-data/spigot.yml:/minecraft/spigot.yml:z"
+      - "./minecraft-data/usercache.json:/minecraft/usercache.json:z"
+      - "./minecraft-data/whitelist.json:/minecraft/whitelist.json:z"
+      - "./minecraft-data/world:/minecraft/world:z"
+      - "./minecraft-data/world_nether:/minecraft/world_nether:z"
+      - "./minecraft-data/world_the_end:/minecraft/world_the_end:z"
     restart: unless-stopped
     deploy:
       resources:
@@ -40,7 +41,7 @@ services:
       org.label-schema.group: "minecraft"
 
   prometheus:
-    image: prom/prometheus:v2.24.0
+    image: prom/prometheus:v2.27.1
     container_name: prometheus
     volumes:
       - "./prometheus:/etc/prometheus:z"
@@ -59,7 +60,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:7.3.7
+    image: grafana/grafana:7.5.8
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -77,7 +78,7 @@ services:
       org.label-schema.group: "monitoring"
 
   nodeexporter:
-    image: prom/node-exporter:v1.0.1
+    image: prom/node-exporter:v1.1.2
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro

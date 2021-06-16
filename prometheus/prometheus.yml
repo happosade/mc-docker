@@ -18,10 +18,10 @@ scrape_configs:
     static_configs:
       - targets: ['nodeexporter:9100']
 
-  - job_name: 'spigot'
+  - job_name: 'minecraft'
     scrape_interval: 5s
     static_configs:
-      - targets: ['spigot:8081']
+      - targets: ['minecraft:8081']
 
   - job_name: 'cadvisor'
     scrape_interval: 5s
